@@ -1,0 +1,19 @@
+REQUERIMIENTOS FUNCIONALES — EYV DIGITAL SOLUCIONES
+
+1. Autenticación de usuarios con sesión.
+2. Registro y consulta de clientes.
+3. Registro y consulta de equipos tecnológicos.
+4. Registro, clasificación, prioridad, asignación, seguimiento y cierre de tickets.
+5. Categorías: hardware, software, redes y conectividad, sistemas operativos, mantenimiento, seguridad informática y ciberseguridad.
+6. Prioridades: baja, media, alta y crítica.
+7. Estados: abierto, en progreso, pendiente, resuelto y cerrado.
+8. Registro y consulta de técnicos.
+9. Módulo de mantenimientos.
+10. Módulo de incidentes de seguridad.
+11. Base de conocimientos.
+12. Reportes y estadísticas.
+13. Administración de usuarios.
+14. Configuración y perfil.
+15. Base de datos relacional MySQL.
+16. Contraseñas almacenadas con hash.
+17. Consultas parametrizadas para reducir riesgos de inyección SQL.

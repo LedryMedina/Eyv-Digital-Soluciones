@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Eyv Digital Soluciones{% endblock %}
+{% block public_content %}
+<div class="landing">
+  <div class="landing-card">
+    <div class="brand large"><div class="brand-mark">E</div><div><strong>Eyv Digital</strong><small>Soluciones</small></div></div>
+    <div class="landing-grid">
+      <div>
+        <span class="pill">SOPORTE · SEGURIDAD · CIBERSEGURIDAD</span>
+        <h1>Tu mesa de ayuda para gestionar cada incidente.</h1>
+        <p>Registra, clasifica, asigna y realiza seguimiento a solicitudes de soporte técnico e incidentes de seguridad desde un solo lugar.</p>
+        <a class="btn primary" href="{{ url_for('login') }}">Ingresar al sistema →</a>
+      </div>
+      <div class="hero-panel">
+        <div class="mini-stat"><b>24</b><span>Tickets gestionados</span></div>
+        <div class="mini-stat"><b>8</b><span>En progreso</span></div>
+        <div class="mini-stat"><b>14</b><span>Resueltos</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

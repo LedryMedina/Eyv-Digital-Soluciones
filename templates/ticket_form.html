@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Nuevo ticket{% endblock %}
+{% block heading %}Crear ticket{% endblock %}
+{% block content %}
+<div class="panel form-panel"><form method="post">
+<div class="form-grid">
+<label>Cliente<select name="cliente_id" required><option value="">Seleccione...</option>{% for c in clients %}<option value="{{ c.id }}">{{ c.nombre }}</option>{% endfor %}</select></label>
+<label>Técnico<select name="tecnico_id"><option value="">Sin asignar</option>{% for t in technicians %}<option value="{{ t.id }}">{{ t.nombre }}</option>{% endfor %}</select></label>
+<label class="span-2">Título<input name="titulo" required placeholder="Ej. Equipo sin conexión"></label>
+<label>Categoría<select name="categoria" required>{% for x in ['Hardware','Software','Redes y conectividad','Sistemas operativos','Mantenimiento','Seguridad informática','Ciberseguridad','Otro'] %}<option>{{ x }}</option>{% endfor %}</select></label>
+<label>Prioridad<select name="prioridad">{% for x in ['Baja','Media','Alta','Crítica'] %}<option>{{ x }}</option>{% endfor %}</select></label>
+<label class="span-2">Descripción<textarea name="descripcion" rows="6" required placeholder="Describe el incidente o solicitud..."></textarea></label>
+</div><div class="form-actions"><a class="btn ghost" href="{{ url_for('tickets') }}">Cancelar</a><button class="btn primary">Guardar ticket</button></div>
+</form></div>
+{% endblock %}

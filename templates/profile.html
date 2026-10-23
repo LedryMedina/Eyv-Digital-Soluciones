@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block title %}Perfil{% endblock %}{% block heading %}Mi perfil{% endblock %}
+{% block content %}<div class="panel profile"><div class="avatar big">{{ current_user[0]|upper }}</div><h2>{{ current_user }}</h2><p>Rol: {{ current_role }}</p></div>{% endblock %}

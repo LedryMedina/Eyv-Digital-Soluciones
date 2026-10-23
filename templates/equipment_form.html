@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Nuevo equipo{% endblock %}{% block heading %}Registrar equipo{% endblock %}
+{% block content %}<div class="panel form-panel"><form method="post"><div class="form-grid">
+<label>Cliente<select name="cliente_id" required>{% for c in clients %}<option value="{{ c.id }}">{{ c.nombre }}</option>{% endfor %}</select></label><label>Tipo<input name="tipo" placeholder="Computador, portátil, impresora..." required></label>
+<label>Marca<input name="marca"></label><label>Modelo<input name="modelo"></label><label>Serial<input name="serial"></label><label>Estado<select name="estado"><option>Activo</option><option>En mantenimiento</option><option>Fuera de servicio</option></select></label>
+</div><div class="form-actions"><a class="btn ghost" href="{{ url_for('equipment') }}">Cancelar</a><button class="btn primary">Guardar equipo</button></div></form></div>{% endblock %}

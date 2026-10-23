@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}Nuevo cliente{% endblock %}{% block heading %}Nuevo cliente{% endblock %}
+{% block content %}<div class="panel form-panel"><form method="post"><div class="form-grid">
+<label>Nombre<input name="nombre" required></label><label>Empresa<input name="empresa"></label><label>Email<input type="email" name="email"></label><label>Teléfono<input name="telefono"></label>
+</div><div class="form-actions"><a class="btn ghost" href="{{ url_for('clients') }}">Cancelar</a><button class="btn primary">Guardar cliente</button></div></form></div>{% endblock %}

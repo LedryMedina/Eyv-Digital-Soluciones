@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block title %}Usuarios{% endblock %}{% block heading %}Usuarios{% endblock %}
+{% block content %}<div class="panel table-wrap"><table><thead><tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Activo</th></tr></thead><tbody>{% for u in users %}<tr><td>{{ u.nombre }}</td><td>{{ u.email }}</td><td>{{ u.rol }}</td><td>{{ 'Sí' if u.activo else 'No' }}</td></tr>{% else %}<tr><td colspan="4">No hay usuarios.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}

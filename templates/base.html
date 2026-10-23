@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Eyv Digital Soluciones{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+{% if current_user %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">E</div>
+      <div><strong>Eyv Digital</strong><small>Soluciones</small></div>
+    </div>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">⌂ <span>Inicio</span></a>
+      <a href="{{ url_for('tickets') }}">▣ <span>Tickets</span></a>
+      <a href="{{ url_for('clients') }}">♙ <span>Clientes</span></a>
+      <a href="{{ url_for('equipment') }}">▤ <span>Equipos</span></a>
+      <a href="{{ url_for('technicians') }}">♟ <span>Técnicos</span></a>
+      <a href="{{ url_for('maintenance') }}">⚙ <span>Mantenimientos</span></a>
+      <a href="{{ url_for('security_incidents') }}">◈ <span>Incidentes de seguridad</span></a>
+      <a href="{{ url_for('knowledge') }}">▤ <span>Base de conocimientos</span></a>
+      <a href="{{ url_for('reports') }}">▥ <span>Reportes</span></a>
+      {% if current_role == 'Administrador' %}<a href="{{ url_for('users') }}">♙ <span>Usuarios</span></a>{% endif %}
+      <a href="{{ url_for('configuration') }}">⚙ <span>Configuración</span></a>
+    </nav>
+    <div class="sidebar-bottom"><a href="{{ url_for('logout') }}">↪ <span>Cerrar sesión</span></a></div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">MESA DE AYUDA</div>
+        <h1>{% block heading %}Panel de control{% endblock %}</h1>
+      </div>
+      <div class="user-menu"><span class="avatar">{{ current_user[0]|upper }}</span><span>{{ current_user }}</span><a href="{{ url_for('profile') }}">Perfil</a></div>
+    </header>
+    <section class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </section>
+  </main>
+</div>
+{% else %}
+{% block public_content %}{% endblock %}
+{% endif %}
+</body>
+</html>

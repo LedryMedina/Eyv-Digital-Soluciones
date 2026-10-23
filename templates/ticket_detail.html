@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Ticket #{{ ticket.id }}{% endblock %}
+{% block heading %}Ticket #{{ ticket.id }}{% endblock %}
+{% block content %}
+<div class="grid-2">
+<div class="panel"><div class="ticket-title"><span class="pill">{{ ticket.categoria }}</span><h2>{{ ticket.titulo }}</h2><p>{{ ticket.descripcion }}</p></div><hr><h3>Datos del cliente</h3><p><b>{{ ticket.cliente }}</b><br>{{ ticket.cliente_email }}</p></div>
+<div class="panel form-panel"><h3>Actualizar seguimiento</h3><form method="post">
+<label>Estado<select name="estado">{% for x in ['Abierto','En progreso','Pendiente','Resuelto','Cerrado'] %}<option {% if ticket.estado==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
+<label>Prioridad<select name="prioridad">{% for x in ['Baja','Media','Alta','Crítica'] %}<option {% if ticket.prioridad==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
+<label>Técnico<select name="tecnico_id"><option value="">Sin asignar</option>{% for t in technicians %}<option value="{{ t.id }}" {% if ticket.tecnico==t.nombre %}selected{% endif %}>{{ t.nombre }}</option>{% endfor %}</select></label>
+<label>Solución<textarea name="solucion" rows="6">{{ ticket.solucion or '' }}</textarea></label><button class="btn primary full">Guardar cambios</button></form></div>
+</div>
+{% endblock %}

@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block title %}Base de conocimientos{% endblock %}{% block heading %}Base de conocimientos{% endblock %}
+{% block content %}<div class="knowledge-grid">{% for title,desc in articles %}<article class="knowledge-card"><span>▤</span><h3>{{ title }}</h3><p>{{ desc }}</p><a href="#">Consultar artículo →</a></article>{% endfor %}</div>{% endblock %}

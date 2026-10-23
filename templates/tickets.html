@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Tickets{% endblock %}
+{% block heading %}Tickets{% endblock %}
+{% block content %}
+<div class="page-actions"><p>Registro, clasificación, asignación y seguimiento de solicitudes.</p><a class="btn primary" href="{{ url_for('new_ticket') }}">＋ Nuevo ticket</a></div>
+<div class="panel"><div class="table-wrap"><table><thead><tr><th>Ticket</th><th>Título</th><th>Cliente</th><th>Categoría</th><th>Prioridad</th><th>Estado</th><th>Técnico</th><th></th></tr></thead>
+<tbody>{% for t in tickets %}<tr><td>#{{ t.id }}</td><td><b>{{ t.titulo }}</b></td><td>{{ t.cliente or '—' }}</td><td>{{ t.categoria }}</td><td><span class="badge">{{ t.prioridad }}</span></td><td><span class="status">{{ t.estado }}</span></td><td>{{ t.tecnico }}</td><td><a class="link" href="{{ url_for('ticket_detail', ticket_id=t.id) }}">Ver</a></td></tr>{% else %}<tr><td colspan="8">No hay tickets registrados.</td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

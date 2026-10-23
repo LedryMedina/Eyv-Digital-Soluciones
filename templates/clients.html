@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Clientes{% endblock %}{% block heading %}Clientes{% endblock %}
+{% block content %}<div class="page-actions"><p>Administración de clientes y organizaciones atendidas.</p><a class="btn primary" href="{{ url_for('new_client') }}">＋ Nuevo cliente</a></div>
+<div class="panel table-wrap"><table><thead><tr><th>Nombre</th><th>Empresa</th><th>Email</th><th>Teléfono</th></tr></thead><tbody>{% for c in clients %}<tr><td><b>{{ c.nombre }}</b></td><td>{{ c.empresa or '—' }}</td><td>{{ c.email or '—' }}</td><td>{{ c.telefono or '—' }}</td></tr>{% else %}<tr><td colspan="4">No hay clientes.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}

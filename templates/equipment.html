@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block title %}Equipos{% endblock %}{% block heading %}Equipos tecnológicos{% endblock %}
+{% block content %}<div class="page-actions"><p>Inventario de dispositivos asociados a clientes.</p><a class="btn primary" href="{{ url_for('new_equipment') }}">＋ Nuevo equipo</a></div>
+<div class="panel table-wrap"><table><thead><tr><th>Tipo</th><th>Marca / modelo</th><th>Serial</th><th>Cliente</th><th>Estado</th></tr></thead><tbody>{% for e in equipment %}<tr><td>{{ e.tipo }}</td><td>{{ e.marca }} {{ e.modelo }}</td><td>{{ e.serial or '—' }}</td><td>{{ e.cliente or '—' }}</td><td><span class="status">{{ e.estado }}</span></td></tr>{% else %}<tr><td colspan="5">No hay equipos.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block heading %}Panel de control{% endblock %}
+{% block content %}
+<div class="welcome">
+  <div><span class="pill">CENTRO DE SOPORTE</span><h2>Hola, {{ current_user }} 👋</h2><p>Gestiona los servicios de soporte técnico y ciberseguridad de Eyv Digital Soluciones.</p></div>
+  <a class="btn light" href="{{ url_for('new_ticket') }}">＋ Crear ticket</a>
+</div>
+<div class="stats">
+  <div class="stat-card"><span>Total tickets</span><strong>{{ data.tickets }}</strong><small>Todos los casos registrados</small></div>
+  <div class="stat-card"><span>En progreso</span><strong>{{ data.progress }}</strong><small>Casos atendidos</small></div>
+  <div class="stat-card"><span>Resueltos</span><strong>{{ data.resolved }}</strong><small>Casos solucionados</small></div>
+  <div class="stat-card"><span>Pendientes</span><strong>{{ data.pending }}</strong><small>Requieren seguimiento</small></div>
+</div>
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-head"><h3>Tickets recientes</h3><a href="{{ url_for('tickets') }}">Ver todos</a></div>
+    <div class="table-wrap"><table><thead><tr><th>ID</th><th>Cliente</th><th>Categoría</th><th>Prioridad</th><th>Estado</th></tr></thead>
+    <tbody>{% for t in recent %}<tr><td>#{{ t.id }}</td><td>{{ t.cliente or '—' }}</td><td>{{ t.categoria }}</td><td><span class="badge {{ t.prioridad|lower|replace('í','i') }}">{{ t.prioridad }}</span></td><td><span class="status">{{ t.estado }}</span></td></tr>{% else %}<tr><td colspan="5">No hay tickets.</td></tr>{% endfor %}</tbody></table></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h3>Acciones rápidas</h3></div>
+    <div class="quick-grid">
+      <a href="{{ url_for('new_ticket') }}" class="quick">＋<b>Nuevo ticket</b><span>Registrar solicitud</span></a>
+      <a href="{{ url_for('new_client') }}" class="quick">♙<b>Nuevo cliente</b><span>Crear registro</span></a>
+      <a href="{{ url_for('new_equipment') }}" class="quick">▤<b>Nuevo equipo</b><span>Registrar dispositivo</span></a>
+      <a href="{{ url_for('security_incidents') }}" class="quick">◈<b>Seguridad</b><span>Gestionar incidentes</span></a>
+    </div>
+  </div>
+</div>
+{% endblock %}
