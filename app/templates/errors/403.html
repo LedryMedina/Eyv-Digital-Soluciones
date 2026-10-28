@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block title %}Acceso denegado{% endblock %}{% block page_heading %}Acceso denegado{% endblock %}{% block content %}<div class="panel empty-state"><span>⛨</span><h1>Acceso no autorizado</h1><p>No tienes permisos para consultar este recurso.</p><a class="btn btn-primary" href="{{ url_for('main.dashboard') }}">Volver al panel</a></div>{% endblock %}

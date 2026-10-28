@@ -1,0 +1,4 @@
+-- Esquema conceptual; las migraciones de Flask-Migrate crean la estructura real.
+-- role, company, users, category, asset, ticket, ticket_comment, ticket_history,
+-- maintenance_record, security_incident, knowledge_article y audit_log.
+-- No ejecutar como sustituto de las migraciones.

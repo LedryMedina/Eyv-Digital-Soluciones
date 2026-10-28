@@ -1,40 +1,77 @@
 # Eyv Digital Soluciones — Mesa de Ayuda
 
-Sistema web académico para gestionar soporte técnico, seguridad informática y ciberseguridad.
+Plataforma web inicial para tickets, clientes, técnicos, inventario, mantenimiento, incidentes de seguridad, base de conocimiento, analítica y sugerencias locales por reglas.
 
 ## Tecnologías
-- Frontend: HTML5, CSS3 y JavaScript
-- Backend: Python + Flask
-- Base de datos: MySQL
-- Despliegue: GitHub + Render
+Python + Flask, PostgreSQL + SQLAlchemy, Flask-Migrate, Flask-Login, Flask-WTF/CSRF, HTML/CSS/JavaScript y Chart.js.
 
-## Instalación local
+## Ejecutar localmente en Windows
+1. Instala Python 3.12 y PostgreSQL.
+2. Crea una base de datos llamada `eyv_digital`.
+3. En PowerShell, desde la carpeta del proyecto:
 
-1. Instalar Python 3.11+ y MySQL/XAMPP.
-2. Crear la base de datos ejecutando `database/eyv_digital_soluciones.sql` en phpMyAdmin.
-3. Copiar `.env.example` como `.env` y ajustar las credenciales.
-4. Crear entorno virtual:
-   `python -m venv .venv`
-5. Activarlo en Windows:
-   `.venv\Scripts\activate`
-6. Instalar dependencias:
-   `pip install -r requirements.txt`
-7. Ejecutar:
-   `python app.py`
-8. Abrir:
-   `http://127.0.0.1:5000`
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+Copy-Item .env.example .env
+```
 
-## Usuario inicial
-- Correo: admin@eyvdigital.com
-- Contraseña: Admin123!
+Edita `.env` y define `DATABASE_URL`, `SECRET_KEY`, `ADMIN_EMAIL` y `ADMIN_PASSWORD`. Ejemplo de URL:
+`postgresql+psycopg://postgres:TU_CLAVE@localhost:5432/eyv_digital`
 
-Cambia esta contraseña antes de usar el sistema en un entorno real.
+No subas `.env` a GitHub. Usa una contraseña larga y única.
 
-## Render
-Este proyecto puede desplegarse como servicio Python. Build command:
-`pip install -r requirements.txt`
+En instalación nueva:
+```powershell
+flask --app run.py db init
+flask --app run.py db migrate -m "Esquema inicial"
+flask --app run.py db upgrade
+flask --app run.py init-admin
+flask --app run.py run --debug
+```
+Abre `http://127.0.0.1:5000`. No repitas `db init` si ya existe la carpeta `migrations`.
 
-Start command:
-`gunicorn app:app`
+## Crear datos ficticios
+Con el administrador creado:
+`flask --app run.py seed-demo`
 
-Las variables de entorno deben configurarse en Render. Para producción se recomienda utilizar una base de datos MySQL administrada compatible con tu aplicación o adaptar el conector a PostgreSQL si el proveedor elegido no ofrece MySQL.
+Los datos de demostración son ficticios. No ejecutes en producción si ya existen empresas registradas.
+
+## Publicar en GitHub y Render
+- Sube el contenido del ZIP al repositorio.
+- En Render crea PostgreSQL y un Web Service enlazado al repositorio.
+- Build: `pip install -r requirements.txt`
+- Start: `flask --app run.py init-admin && gunicorn run:app` para la primera versión (crea las tablas y el administrador si no existe).
+- Define `DATABASE_URL` con la URL de conexión de PostgreSQL y `SECRET_KEY` como secreto.
+- Define `ADMIN_EMAIL` y `ADMIN_PASSWORD` como variables privadas. El comando de inicio ejecuta `init-admin` de forma idempotente: crea tablas/roles faltantes y el administrador si no existe. En versiones futuras, añade migraciones versionadas y cambia el comando de inicio a `flask --app run.py db upgrade && gunicorn run:app`.
+- `/health` comprueba conexión y estado básico.
+
+`render.yaml` propone un Blueprint; verifica el plan/precio vigente de Render antes de desplegar. La disponibilidad gratuita, almacenamiento y condiciones de la base de datos pueden cambiar.
+
+## Módulos incluidos
+- Página pública y login.
+- Dashboard con indicadores y gráficas.
+- Tickets, comentarios, historial, asignación y filtros.
+- Clientes y empresas.
+- Usuarios y roles base.
+- Inventario.
+- Mantenimientos.
+- Incidentes de seguridad.
+- Base de conocimiento.
+- Analítica y exportación CSV.
+- Asistente de clasificación por reglas.
+- Auditoría.
+- Tema claro/oscuro y diseño adaptable.
+
+## Consideraciones importantes
+Es una base de desarrollo para revisión y ampliación, no una auditoría de seguridad ni una garantía de producción. Antes de trabajar con clientes reales:
+- Ejecuta pruebas de integración en PostgreSQL.
+- Revisa aislamiento multiempresa y permisos de todos los módulos.
+- Añade paginación y límites de intentos de acceso.
+- Completa edición/estado de mantenimientos y edición de artículos.
+- Configura copias de seguridad, HTTPS y política de retención.
+- Implementa pruebas automatizadas y recuperación de contraseña.
+- Revisa logs, consultas y exportaciones con datos reales.
+
+El asistente inteligente utiliza reglas locales deterministas; no es un modelo de machine learning entrenado ni utiliza servicios externos.
