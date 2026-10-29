@@ -55,7 +55,7 @@ def create_app():
         print("Administrador creado. Cambia la contraseña tras el primer acceso.")
     @app.cli.command("seed-demo")
     def seed_demo():
-        from .models import Company,Category,Ticket,Asset
+        from .models import Company, Category, Ticket, Asset, TicketHistory
         db.create_all()
         admin=User.query.filter_by(email=os.environ.get("ADMIN_EMAIL","admin@eyvdigital.local").lower()).first()
         if not admin: print("Primero ejecuta flask --app run.py init-admin."); return
